@@ -1,93 +1,114 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Services", href: "#services" },
-    { name: "Partnerships", href: "#partnerships" },
-    { name: "Reviews", href: "#reviews" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "home" },
+    { name: "About", href: "about" },
+    { name: "Services", href: "services" },
+    { name: "Partnerships", href: "partnerships" },
+    { name: "Reviews", href: "reviews" },
   ];
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
+  // Professional Smooth Scroll Logic
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      const offset = 80; // Accounting for navbar height
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      window.scrollTo({
+        top: elementPosition - offset,
+        behavior: "smooth",
+      });
     }
-    setIsOpen(false);
+    setIsOpen(false); // Close mobile menu if open
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b border-border">
-      <div className="container-custom section-padding py-4">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? "bg-white/95 backdrop-blur-md shadow-md py-3" : "bg-transparent py-6"
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-heading font-bold text-lg">J</span>
+          
+          {/* Logo - Clicks back to home */}
+          <div 
+            className="flex items-center gap-3 cursor-pointer" 
+            onClick={() => scrollToSection('home')}
+          >
+            <div className="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center shadow-lg transform transition-transform hover:scale-105">
+              <span className="text-white font-bold text-xl">J</span>
             </div>
-            <div>
-              <span className="font-heading font-bold text-lg text-foreground">Joshagy</span>
-              <span className="block text-xs text-muted-foreground -mt-1">Company Limited</span>
+            <div className="hidden sm:block">
+              <h1 className={`font-bold leading-none tracking-tight ${isScrolled ? "text-slate-900" : "text-white"}`}>
+                JOSHAGY
+              </h1>
+              <p className={`text-[10px] uppercase font-semibold ${isScrolled ? "text-orange-600" : "text-orange-400"}`}>
+                Company Limited
+              </p>
             </div>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollToSection(link.href)}
-                className="nav-link text-sm"
+                className={`text-sm font-bold uppercase tracking-wider transition-colors hover:text-orange-500 ${
+                  isScrolled ? "text-slate-700" : "text-white"
+                }`}
               >
                 {link.name}
               </button>
             ))}
           </div>
 
-          {/* Call Button */}
-          <a
-            href="tel:+233244655948"
-            className="hidden lg:flex btn-accent-construction"
-          >
-            <Phone className="w-4 h-4" />
-            Call Now
-          </a>
+          {/* Call Action */}
+          <div className="flex items-center gap-4">
+            <a
+              href="tel:+233244655948"
+              className="hidden md:flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white px-5 py-2.5 rounded-full text-sm font-bold transition-all active:scale-95 shadow-lg shadow-orange-900/20"
+            >
+              <Phone size={16} />
+              024 465 5948
+            </a>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 text-foreground"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+            {/* Mobile Toggle */}
+            <button className="lg:hidden text-orange-500 p-2" onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Dropdown */}
         {isOpen && (
-          <div className="lg:hidden mt-4 pb-4 border-t border-border pt-4 animate-fade-up">
-            <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <button
-                  key={link.name}
-                  onClick={() => scrollToSection(link.href)}
-                  className="text-left text-foreground/80 hover:text-foreground font-medium transition-colors"
-                >
-                  {link.name}
-                </button>
-              ))}
-              <a
-                href="tel:+233244655948"
-                className="btn-accent-construction mt-2 w-full justify-center"
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-2xl border-t border-gray-100 p-6 flex flex-col gap-4 animate-in slide-in-from-top-2 duration-300">
+            {navLinks.map((link) => (
+              <button
+                key={link.name}
+                onClick={() => scrollToSection(link.href)}
+                className="text-left text-base font-bold text-slate-800 uppercase tracking-wide py-2 border-b border-gray-50 last:border-0 hover:text-orange-600"
               >
-                <Phone className="w-4 h-4" />
-                Call Now
-              </a>
-            </div>
+                {link.name}
+              </button>
+            ))}
+            <a
+              href="tel:+233244655948"
+              className="flex items-center justify-center gap-2 bg-orange-600 text-white py-4 rounded-xl font-bold mt-2"
+            >
+              <Phone size={20} />
+              Call Now
+            </a>
           </div>
         )}
       </div>

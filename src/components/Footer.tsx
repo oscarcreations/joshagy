@@ -1,4 +1,4 @@
-import { Phone, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Phone, MapPin, Clock, Facebook, Twitter, Instagram, Linkedin, ArrowUpRight } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -14,8 +14,8 @@ const Footer = () => {
 
   const services = [
     "General Construction",
-    "Building & Structural Works",
-    "Renovation & Maintenance",
+    "Structural Works",
+    "Renovations",
     "Civil Works",
     "Project Management",
   ];
@@ -28,47 +28,59 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-foreground">
-      <div className="container-custom section-padding py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-          {/* Company Info */}
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-                <span className="text-accent-foreground font-heading font-bold text-lg">J</span>
+    <footer className="bg-slate-950 pt-16 md:pt-24 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-5 sm:px-10 md:px-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          
+          {/* 1. Company Info */}
+          <div className="space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-orange-600 flex items-center justify-center shadow-lg shadow-orange-900/20">
+                <span className="text-white font-black text-xl">J</span>
               </div>
-              <div>
-                <span className="font-heading font-bold text-lg text-background">Joshagy</span>
-                <span className="block text-xs text-background/60 -mt-1">Company Limited</span>
+              <div className="leading-none">
+                <span className="font-black text-xl text-white tracking-tighter uppercase">Joshagy</span>
+                <span className="block text-[10px] text-orange-500 font-bold tracking-[0.2em] uppercase">Company Ltd</span>
               </div>
             </div>
-            <p className="text-background/70 text-sm mb-4">
-              Reliable Construction & Contracting Services in Tarkwa, Western Region of Ghana. 
-              Building excellence, one project at a time.
+            
+            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
+              Excellence in civil engineering and mining support. Delivering high-quality 
+              construction solutions across the Western Region of Ghana.
             </p>
+
             <div className="flex gap-3">
-              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (
+              {[
+                { Icon: Facebook, href: "https://facebook.com/joshagy", label: "Facebook" },
+                { Icon: Twitter, href: "https://twitter.com/joshagy", label: "Twitter" },
+                { Icon: Instagram, href: "https://instagram.com/joshagy", label: "Instagram" },
+                { Icon: Linkedin, href: "https://linkedin.com/company/joshagy", label: "LinkedIn" },
+              ].map(({ Icon, href, label }, index) => (
                 <a
                   key={index}
-                  href="#"
-                  className="w-9 h-9 rounded-lg bg-background/10 flex items-center justify-center text-background/70 hover:bg-accent hover:text-accent-foreground transition-colors"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:bg-orange-600 hover:text-white transition-all duration-300 border border-white/10 hover:border-orange-600"
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon size={18} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* 2. Quick Links */}
           <div>
-            <h4 className="font-heading font-semibold text-background mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-white uppercase tracking-widest text-xs mb-6">Navigation</h4>
+            <ul className="space-y-4">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <button
                     onClick={() => scrollToSection(link.href)}
-                    className="text-background/70 hover:text-accent text-sm transition-colors"
+                    className="text-slate-400 hover:text-orange-500 text-sm transition-colors flex items-center group"
                   >
+                    <span className="w-0 group-hover:w-4 h-[1px] bg-orange-500 transition-all duration-300 mr-0 group-hover:mr-2"></span>
                     {link.name}
                   </button>
                 </li>
@@ -76,52 +88,71 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* 3. Services */}
           <div>
-            <h4 className="font-heading font-semibold text-background mb-4">Our Services</h4>
-            <ul className="space-y-2">
+            <h4 className="font-bold text-white uppercase tracking-widest text-xs mb-6">Our Expertise</h4>
+            <ul className="space-y-4">
               {services.map((service, index) => (
-                <li key={index}>
-                  <span className="text-background/70 text-sm">{service}</span>
+                <li key={index} className="text-slate-400 text-sm flex items-center gap-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-orange-600/40" />
+                  {service}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-heading font-semibold text-background mb-4">Contact Info</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-accent mt-1" />
-                <a href="tel:+233244655948" className="text-background/70 text-sm hover:text-accent transition-colors">
-                  024 465 5948
-                </a>
-              </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-accent mt-1" />
-                <span className="text-background/70 text-sm">
-                  WT 0006, 9848 Stadium Ave,<br />
-                  Tarkwa, Western Region, Ghana
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="w-4 h-4 text-accent mt-1" />
-                <span className="text-background/70 text-sm">Open 24 Hours</span>
-              </li>
-            </ul>
+          {/* 4. Contact Info */}
+          <div className="space-y-6">
+            <h4 className="font-bold text-white uppercase tracking-widest text-xs mb-6">Direct Contact</h4>
+            <div className="space-y-4">
+              <a href="tel:+233244655948" className="flex items-start gap-4 group">
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-orange-500 group-hover:bg-orange-600 group-hover:text-white transition-all">
+                   <Phone size={18} />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 font-bold uppercase">Phone</p>
+                  <p className="text-slate-200 text-sm font-bold mt-0.5">024 465 5948</p>
+                </div>
+              </a>
+              
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-orange-500">
+                   <MapPin size={18} />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 font-bold uppercase">Head Office</p>
+                  <p className="text-slate-200 text-sm font-bold mt-0.5 leading-relaxed">
+                    Stadium Ave, Tarkwa<br />Western Region, GH
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-background/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-background/60 text-sm text-center md:text-left">
-              © {currentYear} Joshagy Company Limited. All rights reserved.
+        <div className="py-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left">
+            <p className="text-slate-500 text-sm font-medium">
+              © {currentYear} <span className="text-slate-300">Joshagy Company Limited</span>. 
             </p>
-            <p className="text-background/40 text-xs">
-              General Contractor • Tarkwa, Ghana
+            <p className="text-[10px] text-slate-600 uppercase tracking-widest mt-1">
+              General Contractor & Mining Support Specialists
             </p>
+          </div>
+          
+          {/* Mini Footer: Developer Credit */}
+          <div className="flex flex-col items-center md:items-end gap-1">
+            <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Digital Solutions by</p>
+            <a 
+              href="https://mildaxtechnology.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 text-slate-300 hover:text-orange-500 transition-colors font-bold text-sm"
+            >
+              Mildax Technology
+              <ArrowUpRight size={14} className="opacity-50 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+            </a>
           </div>
         </div>
       </div>
