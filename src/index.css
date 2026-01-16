@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Joshagy Company Limited - Construction Design System */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap');
+
+@layer base {
+  :root {
+    /* Deep Navy Blue - Primary Brand */
+    --background: 210 20% 98%;
+    --foreground: 220 30% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 15%;
+
+    /* Deep Navy Primary */
+    --primary: 215 80% 22%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Slate Grey Secondary */
+    --secondary: 215 15% 92%;
+    --secondary-foreground: 215 30% 25%;
+
+    /* Muted Grays */
+    --muted: 210 15% 95%;
+    --muted-foreground: 215 15% 45%;
+
+    /* Construction Gold/Yellow Accent */
+    --accent: 43 96% 50%;
+    --accent-foreground: 220 30% 15%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 20% 88%;
+    --input: 215 20% 88%;
+    --ring: 215 80% 22%;
+
+    --radius: 0.5rem;
+
+    /* Custom Construction Colors */
+    --construction-gold: 43 96% 50%;
+    --construction-orange: 30 95% 55%;
+    --construction-navy: 215 80% 22%;
+    --construction-navy-light: 215 60% 35%;
+    --construction-slate: 215 15% 45%;
+    --construction-light: 210 20% 98%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(215 80% 22%) 0%, hsl(215 60% 35%) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(43 96% 50%) 0%, hsl(30 95% 55%) 100%);
+    --gradient-overlay: linear-gradient(180deg, hsla(215, 80%, 22%, 0.85) 0%, hsla(215, 60%, 15%, 0.95) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px -2px hsla(215, 30%, 20%, 0.1);
+    --shadow-md: 0 8px 24px -8px hsla(215, 30%, 20%, 0.15);
+    --shadow-lg: 0 16px 48px -12px hsla(215, 30%, 20%, 0.2);
+    --shadow-gold: 0 8px 24px -8px hsla(43, 96%, 50%, 0.3);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-16 lg:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-gold);
+  }
+
+  .btn-construction {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+  }
+
+  .btn-primary-construction {
+    @apply btn-construction bg-primary text-primary-foreground hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-accent-construction {
+    @apply btn-construction text-accent-foreground hover:shadow-construction-gold hover:-translate-y-0.5;
+    background-image: var(--gradient-gold);
+  }
+
+  .btn-outline-construction {
+    @apply btn-construction border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground;
+  }
+
+  .card-construction {
+    @apply bg-card rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  .hero-overlay {
+    background: var(--gradient-overlay);
+  }
+
+  .floating-action {
+    @apply fixed bottom-6 right-6 z-50 flex flex-col gap-3;
+  }
+
+  .floating-btn {
+    @apply w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:scale-110;
+  }
+
+  .nav-link {
+    @apply relative text-foreground/80 hover:text-foreground font-medium transition-colors duration-200;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300;
+    content: '';
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .section-title {
+    @apply text-3xl lg:text-4xl font-bold text-foreground mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-muted-foreground max-w-2xl;
+  }
+}
+
+@layer utilities {
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
