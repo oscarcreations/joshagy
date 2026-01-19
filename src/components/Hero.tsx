@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Phone, Star, Clock } from "lucide-react";
 import heroImage from "@/assets/hero-construction.jpg";
 import jordan from "@/assets/jordan.png";
-import doorBefore from "@/assets/door.jpg";
+import doorBefore from "@/assets/door2.jpg";
 
 
 // const doorAfter =
