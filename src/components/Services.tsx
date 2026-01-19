@@ -6,6 +6,7 @@ import {
   Briefcase,
   Wrench,
   ArrowRight,
+  DoorOpen,
 } from "lucide-react";
 
 const scrollToQuote = () => {
@@ -14,12 +15,12 @@ const scrollToQuote = () => {
     const offset = 80;
     const elementPosition =
       element.getBoundingClientRect().top + window.pageYOffset;
+
     window.scrollTo({
       top: elementPosition - offset,
       behavior: "smooth",
     });
 
-    // Custom Event to tell the Contact form to switch to "Quote" mode
     window.dispatchEvent(new CustomEvent("openQuoteForm"));
   }
 };
@@ -30,37 +31,37 @@ const Services = () => {
       icon: Building2,
       title: "General Construction",
       description:
-        "Complete building solutions from foundation to finishing, delivering quality structures for residential and commercial needs.",
+        "Complete building solutions from foundation to finishing for residential and commercial projects.",
     },
     {
       icon: Hammer,
       title: "Structural Works",
       description:
-        "Expert structural engineering and building works ensuring safety, durability, and compliance with Ghana standards.",
+        "Expert structural works ensuring durability, safety, and compliance with Ghana standards.",
     },
     {
       icon: RefreshCcw,
-      title: "Renovation",
+      title: "Renovation & Maintenance",
       description:
-        "Modernize and maintain your properties with our professional renovation and industrial maintenance services.",
+        "Professional renovation services to modernize and maintain properties efficiently.",
     },
     {
       icon: HardHat,
       title: "Civil Works",
       description:
-        "Infrastructure development including roads, drainage systems, and public works projects across the Western Region.",
+        "Infrastructure projects including drainage systems, roads, and site preparation.",
     },
     {
       icon: Briefcase,
       title: "Project Management",
       description:
-        "End-to-end management ensuring your construction projects are delivered on time and within budget.",
+        "Complete project supervision to ensure quality delivery on time and within budget.",
     },
     {
       icon: Wrench,
-      title: "Specialized Services",
+      title: "Specialized Engineering Services",
       description:
-        "Customized mining support and engineering solutions tailored to meet your unique project specifications.",
+        "Tailored engineering and industrial support services for unique project needs.",
     },
   ];
 
@@ -70,78 +71,84 @@ const Services = () => {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
           <div className="inline-block px-4 py-1.5 mb-4 text-[10px] md:text-sm font-bold tracking-[0.2em] text-orange-600 uppercase bg-orange-100/50 rounded-full">
-            Our Expertise
+            Our Core Services
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-6">
-            Comprehensive <br className="sm:hidden" /> Construction Solutions
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6">
+            Building, Construction <br className="sm:hidden" /> & Refurbishment
           </h2>
-          <p className="text-base md:text-lg text-slate-600 leading-relaxed">
-            From industrial mining support to residential developments, we
-            provide expert engineering services across Tarkwa and beyond.
+          <p className="text-base md:text-lg text-slate-600">
+            Reliable construction and refurbishment services designed to improve
+            value, safety, and durability.
           </p>
         </div>
 
-        {/* Services Grid */}
+        {/* FEATURED SERVICE */}
+        <div className="mb-16">
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-orange-600 to-orange-500 p-10 md:p-14 shadow-2xl">
+            <DoorOpen className="absolute -right-6 -bottom-6 w-40 h-40 text-white/10" />
+
+            <div className="relative z-10 max-w-3xl">
+              <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-6">
+                <DoorOpen className="w-8 h-8 text-orange-600" />
+              </div>
+
+              <h3 className="text-2xl md:text-3xl font-black text-white mb-4">
+                Door Refurbishment & Finishing
+              </h3>
+
+              <p className="text-white/90 text-base md:text-lg mb-8 leading-relaxed">
+                We specialize in professional door refurbishment, repairs, and
+                finishing for residential, commercial, and industrial buildings.
+                Restore strength, security, and appearance without full
+                replacement.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={scrollToQuote}
+                  className="bg-white text-orange-600 px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-orange-50 transition-all"
+                >
+                  Request Door Service <ArrowRight size={18} />
+                </button>
+                <a
+                  href="tel:+233244655948"
+                  className="border border-white/30 text-white px-8 py-4 rounded-xl font-bold hover:bg-white/10 transition-all text-center"
+                >
+                  Call Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* SERVICES GRID */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {services.map((service, index) => (
             <div
               key={index}
               className="group relative bg-white p-8 rounded-3xl border border-slate-200 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-2 overflow-hidden"
             >
-              {/* Decorative Background Icon */}
               <service.icon className="absolute -right-4 -bottom-4 w-24 h-24 text-slate-50 group-hover:text-orange-50 transition-colors duration-300" />
 
               <div className="relative z-10">
-                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mb-6 group-hover:bg-orange-600 transition-colors duration-500 shadow-lg shadow-slate-200 group-hover:shadow-orange-200">
+                <div className="w-14 h-14 rounded-2xl bg-slate-900 flex items-center justify-center mb-6 group-hover:bg-orange-600 transition-all">
                   <service.icon className="w-7 h-7 text-white" />
                 </div>
 
-                <h3 className="font-bold text-xl text-slate-900 mb-3 group-hover:text-orange-600 transition-colors">
+                <h3 className="font-bold text-xl text-slate-900 mb-3 group-hover:text-orange-600">
                   {service.title}
                 </h3>
 
-                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
+                <p className="text-slate-600 text-sm md:text-base mb-6">
                   {service.description}
                 </p>
 
-                <div className="flex items-center gap-2 text-orange-600 font-bold text-sm uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex items-center gap-2 text-orange-600 font-bold text-sm uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity">
                   Learn More <ArrowRight size={16} />
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Professional CTA Box */}
-        <div className="mt-16 md:mt-24 p-8 md:p-12 rounded-[2rem] bg-slate-900 relative overflow-hidden text-center">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10 pointer-events-none">
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#f97316_1px,transparent_1px)] [background-size:20px_20px]" />
-          </div>
-
-          <div className="relative z-10">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-              Need a custom solution for your project?
-            </h3>
-            <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-              Whether it's a small renovation or a large-scale mining project,
-              Joshagy is ready to deliver.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="tel:+233244655948"
-                className="w-full sm:w-auto bg-orange-600 hover:bg-orange-500 text-white px-10 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-3 shadow-lg shadow-orange-900/40"
-              >
-                Discuss Your Project
-              </a>
-              <button
-                onClick={scrollToQuote}
-                className="w-full sm:w-auto text-white border border-white/20 hover:bg-white/5 px-10 py-4 rounded-xl font-bold transition-all"
-              >
-                Get a Quote
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     </section>
