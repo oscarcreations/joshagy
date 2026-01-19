@@ -70,8 +70,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email Us",
-      content: "info@joshagy.com",
-      href: "mailto:info@joshagy.com",
+      content: "joshuagyecompany@gmail.com",
+      href: "mailto:joshuagyecompany@gmail.com",
     },
     {
       icon: MapPin,
